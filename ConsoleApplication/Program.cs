@@ -16,7 +16,7 @@ namespace ConsoleApplication
 
             Console.WriteLine("Input the price of the trade:");
             string userInput2 = Console.ReadLine();
-            double price = double.Parse(userInput2);
+            double tradePrice = double.Parse(userInput2);
 
             TransactionType trcType;
             Console.WriteLine("Please write the type of Transaction: Buy or Sell");
@@ -24,10 +24,19 @@ namespace ConsoleApplication
             trcType = (TransactionType)Enum.Parse(typeof(TransactionType), userInput3, true);
 
             int sign = (trcType == TransactionType.Buy) ? 1 : -1;
-            double currentValue = (double) sign * nominal * price;
+            double currentValue = (double) sign * nominal * tradePrice;
 
             Console.WriteLine($"The current value equals: {currentValue}");
 
+            Console.WriteLine("Input the original price:");
+            string userInput4 = Console.ReadLine();
+            double origPrice = double.Parse(userInput4);
+
+            int factor = (trcType == TransactionType.Sell) ? 1 : 0;
+            double profitLost = (origPrice - tradePrice) *nominal * factor;
+
+            Console.WriteLine($"Your profit-lost equals: {profitLost}");
+                
             Console.ReadKey();
         }
     }
